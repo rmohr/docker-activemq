@@ -7,7 +7,7 @@ Run the latest container with:
 
       docker pull rmohr/activemq
       docker run -p 61616:61616 -p 8161:8161 rmohr/activemq
-  
+
 The Broker listens on port 61616 and the Web Console on port 8161.
 
 Customizing configuration and persistence location
