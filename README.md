@@ -8,10 +8,10 @@ Run the latest container with:
     docker pull rmohr/activemq
     docker run -p 61616:61616 -p 8161:8161 rmohr/activemq
 
-The Broker listens on port 61616 and the Web Console on port 8161.
+The JMX broker listens on port 61616 and the Web Console on port 8161.
 
 Image Tags
-----
+----------
 
     rmohr/activemq:latest
     rmohr/activemq:5.10.0
@@ -19,6 +19,21 @@ Image Tags
     rmohr/activemq:5.10.2
     rmohr/activemq:5.11.0
     rmohr/activemq:5.11.1
+    rmohr/activemq:5.12.0
+    rmohr/activemq:5.12.1
+    rmohr/activemq:5.12.2
+    rmohr/activemq:5.13.0
+    rmohr/activemq:5.13.1
+
+Port Map
+--------
+
+    61616 JMX
+    8161  UI
+    5672  AMQP  (since `rmohr/activemq:5.12.1`)
+    61613 STOMP (since `rmohr/activemq:5.12.1`)
+    1883 MQTT   (since `rmohr/activemq:5.12.1`)
+    61614 WS    (since `rmohr/activemq:5.12.1`)
 
 Customizing configuration and persistence location
 --------------------------------------------------
