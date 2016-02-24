@@ -28,7 +28,7 @@ Image Tags
 Port Map
 --------
 
-    61616 JMX
+    61616 JMS
     8161  UI
     5672  AMQP  (since `rmohr/activemq:5.12.1`)
     61613 STOMP (since `rmohr/activemq:5.12.1`)
