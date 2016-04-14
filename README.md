@@ -1,6 +1,8 @@
 docker-activemq
 ===============
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/rmohr/activemq.svg?maxAge=2592000)]()
+
 [Docker](https://www.docker.io/) file for trusted builds of [ActiveMQ](http://activemq.apache.org/) on https://registry.hub.docker.com/u/rmohr/activemq/.
 
 Run the latest container with:
