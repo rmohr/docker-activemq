@@ -1,5 +1,5 @@
 activemq-service:
-  image: rmohr/activemq:latest
+  build: ./$AMQ_VERSION
   environment:
     - TZ=CEST
   ports:

@@ -3,7 +3,13 @@ services:
   - docker
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.5.2
+  global:
+      DOCKER_COMPOSE_VERSION: 1.5.2
+  matrix:
+      - AMQ_VERSION=5.12.1
+      - AMQ_VERSION=5.12.2
+      - AMQ_VERSION=5.13.0
+      - AMQ_VERSION=5.13.1
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
