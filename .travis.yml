@@ -10,6 +10,8 @@ env:
       - AMQ_VERSION=5.12.2
       - AMQ_VERSION=5.13.0
       - AMQ_VERSION=5.13.1
+      - AMQ_VERSION=5.13.2
+      - AMQ_VERSION=5.13.3
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
