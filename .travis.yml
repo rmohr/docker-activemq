@@ -1,0 +1,33 @@
+sudo: required
+services:
+  - docker
+
+env:
+  global:
+      DOCKER_COMPOSE_VERSION: 1.5.2
+  matrix:
+      - AMQ_VERSION=5.12.1
+      - AMQ_VERSION=5.12.2
+      - AMQ_VERSION=5.13.0
+      - AMQ_VERSION=5.13.1
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+script:
+  - docker-compose build
+  - docker-compose up -d
+  - docker-compose ps
+  - docker-compose ps | grep Up
+  - docker-compose ps | grep "1883/tcp"
+  - docker-compose ps | grep "5672/tcp"
+  - docker-compose ps | grep "61613/tcp"
+  - docker-compose ps | grep "61614/tcp"
+  - docker-compose ps | grep "61616/tcp"
+  - docker-compose ps | grep "8161->8161"
+  # wait until ActiveMQ is available
+  - docker-compose run activemq-service wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@activemq-service:8161/admin/
+  # do additional tests 
