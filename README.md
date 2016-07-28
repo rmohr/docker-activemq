@@ -29,6 +29,7 @@ Image Tags
     rmohr/activemq:5.13.1
     rmohr/activemq:5.13.2
     rmohr/activemq:5.13.3
+    rmohr/activemq:5.13.4
 
 Port Map
 --------
