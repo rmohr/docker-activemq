@@ -10,7 +10,8 @@ RUN set -x && \
     curl -s https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz | tar xvz -C /opt && \
     ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
     useradd -r -M -d $ACTIVEMQ_HOME activemq && \
-    chown activemq:activemq /opt/$ACTIVEMQ -R
+    chown -R activemq:activemq /opt/$ACTIVEMQ && \
+    chown -h activemq:activemq $ACTIVEMQ_HOME
 
 USER activemq
 
