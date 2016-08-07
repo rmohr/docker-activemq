@@ -9,7 +9,7 @@ ENV ACTIVEMQ_HOME /opt/activemq
 RUN set -x && \
   mkdir -p /opt && \
   apk --update add --virtual build-dependencies curl && \
-  curl -s http://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz | tar xvz -C /opt && \
+  curl -s https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz | tar xvz -C /opt && \
   ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
   addgroup -S activemq && \
   adduser -S -H -h $ACTIVEMQ_HOME activemq && \
