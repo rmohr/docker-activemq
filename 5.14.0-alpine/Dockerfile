@@ -11,9 +11,9 @@ RUN set -x && \
   apk --update add --virtual build-dependencies curl && \
   curl -s https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz | tar xvz -C /opt && \
   ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
-  addgroup -S activemq && \
-  adduser -S -H -h $ACTIVEMQ_HOME activemq && \
-  chown activemq:activemq /opt/$ACTIVEMQ -R && \
+  addgroup -S activemq && adduser -S -H -G activemq -h $ACTIVEMQ_HOME activemq && \
+  chown -R activemq:activemq /opt/$ACTIVEMQ && \
+  chown -h activemq:activemq $ACTIVEMQ_HOME && \
   apk del build-dependencies && \
   rm -rf /var/cache/apk/*
 
