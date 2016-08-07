@@ -1,4 +1,4 @@
-FROM java:7
+FROM java:7-jre
 
 ENV ACTIVEMQ_VERSION 5.13.3
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
