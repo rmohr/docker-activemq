@@ -34,6 +34,6 @@ script:
   - docker-compose ps | grep "61616/tcp"
   - docker-compose ps | grep "8161->8161"
   # wait until ActiveMQ is available
-  - if [[ $AMQ_VERSION = *alpine ]] ; do docker-compose run activemq-service apk add wget ; fi
+  - if [[ $AMQ_VERSION = *alpine ]] ; then docker-compose run activemq-service apk add wget ; fi
   - docker-compose run activemq-service wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@activemq-service:8161/admin/
   # do additional tests
