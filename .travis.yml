@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-      DOCKER_COMPOSE_VERSION: 1.5.2
+      DOCKER_COMPOSE_VERSION: 1.7.1
   matrix:
       - AMQ_VERSION=5.12.1
       - AMQ_VERSION=5.12.2
@@ -13,12 +13,20 @@ env:
       - AMQ_VERSION=5.13.2
       - AMQ_VERSION=5.13.3
       - AMQ_VERSION=5.13.4
+      - AMQ_VERSION=5.14.0
+      - AMQ_VERSION=5.14.0-alpine
 
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
+  - sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" > /etc/apt/sources.list.d/docker.list'
+  - sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  - sudo apt-get update
+  - sudo apt-key update
+  - sudo apt-get -qqy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine=1.11.1-0~precise
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - docker -v
+  - docker-compose -v
 
 script:
   - docker-compose build
@@ -32,5 +40,6 @@ script:
   - docker-compose ps | grep "61616/tcp"
   - docker-compose ps | grep "8161->8161"
   # wait until ActiveMQ is available
+  - if [[ $AMQ_VERSION = *alpine ]] ; then docker-compose exec --user root activemq-service apk add --no-cache wget ; fi
   - docker-compose run activemq-service wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@activemq-service:8161/admin/
-  # do additional tests 
+  # do additional tests
