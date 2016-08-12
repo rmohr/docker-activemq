@@ -13,6 +13,7 @@ env:
       - AMQ_VERSION=5.13.2
       - AMQ_VERSION=5.13.3
       - AMQ_VERSION=5.13.4
+      - AMQ_VERSION=5.14.0
 
 before_install:
   - sudo rm -rf /usr/local/bin/docker-compose
@@ -33,4 +34,4 @@ script:
   - docker-compose ps | grep "8161->8161"
   # wait until ActiveMQ is available
   - docker-compose run activemq-service wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@activemq-service:8161/admin/
-  # do additional tests 
+  # do additional tests
