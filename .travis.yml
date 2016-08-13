@@ -1,10 +1,12 @@
 sudo: required
+
 services:
   - docker
 
 env:
   global:
-      DOCKER_COMPOSE_VERSION: 1.5.2
+    - DOCKER_VERSION=1.12.0-0~trusty
+    - DOCKER_COMPOSE_VERSION=1.8.0
   matrix:
       - AMQ_VERSION=5.12.1
       - AMQ_VERSION=5.12.2
@@ -14,12 +16,18 @@ env:
       - AMQ_VERSION=5.13.3
       - AMQ_VERSION=5.13.4
       - AMQ_VERSION=5.14.0
+      - AMQ_VERSION=5.14.0-alpine
 
 before_install:
+  # upgrade docker
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION} wget
+  - docker version
+  # upgrade docker-compose
   - sudo rm -rf /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - docker-compose version
 
 script:
   - docker-compose build
@@ -33,5 +41,5 @@ script:
   - docker-compose ps | grep "61616/tcp"
   - docker-compose ps | grep "8161->8161"
   # wait until ActiveMQ is available
-  - docker-compose run activemq-service wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@activemq-service:8161/admin/
+  - wget --retry-connrefused --waitretry=5 --read-timeout=20 --timeout=15 -t 10 -O /dev/null http://admin:admin@localhost:8161/admin/
   # do additional tests
