@@ -39,7 +39,7 @@ Port Map
     8161  UI
     5672  AMQP  (since `rmohr/activemq:5.12.1`)
     61613 STOMP (since `rmohr/activemq:5.12.1`)
-    1883 MQTT   (since `rmohr/activemq:5.12.1`)
+    1883  MQTT  (since `rmohr/activemq:5.12.1`)
     61614 WS    (since `rmohr/activemq:5.12.1`)
 
 Customizing configuration and persistence location
