@@ -1,4 +1,4 @@
-FROM java:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 ENV ACTIVEMQ_VERSION 5.14.0
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
