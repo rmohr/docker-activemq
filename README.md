@@ -32,6 +32,8 @@ Image Tags
     rmohr/activemq:5.13.4
     rmohr/activemq:5.14.0
     rmohr/activemq:5.14.0-alpine
+    rmohr/activemq:5.14.1
+    rmohr/activemq:5.14.1-alpine
 
 Port Map
 --------
