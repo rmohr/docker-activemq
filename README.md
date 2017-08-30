@@ -16,7 +16,7 @@ The JMX broker listens on port 61616 and the Web Console on port 8161.
 Image Tags
 ----------
 
-    rmohr/activemq:latest
+    rmohr/activemq:latest (rmohr/activemq:5.14.5)
     rmohr/activemq:5.10.0
     rmohr/activemq:5.10.1
     rmohr/activemq:5.10.2
@@ -38,6 +38,10 @@ Image Tags
     rmohr/activemq:5.14.2-alpine
     rmohr/activemq:5.14.3
     rmohr/activemq:5.14.3-alpine
+    rmohr/activemq:5.14.4
+    rmohr/activemq:5.14.4-alpine
+    rmohr/activemq:5.14.5
+    rmohr/activemq:5.14.5-alpine
 
 Port Map
 --------
