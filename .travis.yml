@@ -22,6 +22,10 @@ env:
       - AMQ_VERSION=5.14.2-alpine
       - AMQ_VERSION=5.14.3
       - AMQ_VERSION=5.14.3-alpine
+      - AMQ_VERSION=5.14.4
+      - AMQ_VERSION=5.14.4-alpine
+      - AMQ_VERSION=5.14.5
+      - AMQ_VERSION=5.14.5-alpine
 
 before_install:
   # upgrade docker-compose
