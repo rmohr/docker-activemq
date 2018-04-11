@@ -16,4 +16,4 @@ RUN chgrp -R 0 /app && \
 
 EXPOSE $ACTIVEMQ_TCP $ACTIVEMQ_AMQP $ACTIVEMQ_STOMP $ACTIVEMQ_MQTT $ACTIVEMQ_WS $ACTIVEMQ_UI
 
-CMD ["/bin/sh", "-c", "echo 'hello kambiz'; pwd; ls -al; cd apache-activemq-5.14.5/bin; ls -al; ./activemq console  "]
+CMD ["/bin/sh", "-c", "echo 'Openshift v3.9.14 Compliant ApacheMQ Image'; pwd; ls -al; cd apache-activemq-5.14.5/bin; ls -al; ./activemq console  "]
