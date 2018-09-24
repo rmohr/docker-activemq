@@ -32,6 +32,8 @@ env:
       - AMQ_VERSION=5.15.3-alpine
       - AMQ_VERSION=5.15.4
       - AMQ_VERSION=5.15.4-alpine
+      - AMQ_VERSION=5.15.5
+      - AMQ_VERSION=5.15.5-alpine
       - AMQ_VERSION=5.15.6
       - AMQ_VERSION=5.15.6-alpine
 
