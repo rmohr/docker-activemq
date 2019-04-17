@@ -16,7 +16,7 @@ The JMX broker listens on port 61616 and the Web Console on port 8161.
 Image Tags
 ----------
 
-    rmohr/activemq:latest (rmohr/activemq:5.14.5)
+    rmohr/activemq:latest (rmohr/activemq:5.15.4)
     rmohr/activemq:5.10.0
     rmohr/activemq:5.10.1
     rmohr/activemq:5.10.2
@@ -46,6 +46,12 @@ Image Tags
     rmohr/activemq:5.15.2-alpine
     rmohr/activemq:5.15.3
     rmohr/activemq:5.15.3-alpine
+    rmohr/activemq:5.15.4
+    rmohr/activemq:5.15.4-alpine
+    rmohr/activemq:5.15.5
+    rmohr/activemq:5.15.5-alpine
+    rmohr/activemq:5.15.6
+    rmohr/activemq:5.15.6-alpine
 
 Port Map
 --------
@@ -59,12 +65,35 @@ Port Map
 
 Customizing configuration and persistence location
 --------------------------------------------------
+By default data and configuration is stored inside the container and will be
+lost after the container has been shut down and removed. To persist these
+files you can mount these directories to directories on your host system:
 
-ActiveMQ checks your environment for the variables *ACTIVEMQ_BASE*, *ACTIVEMQ_CONF* and *ACTIVEMQ_DATA*.
-Just override them with your desired location:
+    docker run -p 61616:61616 -p 8161:8161 \
+               -v /your/persistent/dir/conf:/opt/activemq/conf \
+               -v /your/persistent/dir/data:/opt/activemq/data \
+               rmohr/activemq
 
-    docker run -p 61616:61616 -p 8161:8161 -e ACTIVEMQ_CONF=/etc/activemq/conf -e ACTIVEMQ_DATA=/var/lib/activemq/data rmohr/activemq
+ActiveMQ expects that some configuration files already exists, so they won't be
+created automatically, instead you have to create them on your own before
+starting the container. If you want to start with the default configuration you
+can initialize your directories using some intermediate container:
 
-As an alternative you can just mount your persistent config and data directories into the default location:
+    docker run --user root --rm -ti \
+      -v /your/persistent/dir/conf:/mnt/conf \
+      -v /your/persistent/dir/data:/mnt/data \
+      rmohr/activemq:5.15.4-alpine /bin/sh
 
-    docker run -p 61616:61616 -p 8161:8161 -v /opt/activemq/conf:/opt/activemq/conf -v /opt/activemq/data:/opt/activemq/data rmohr/activemq
+This will bring up a shell, so you can just execute the following commands
+inside this intermediate container to copy the default configuration to your
+host directory:
+
+    chown activemq:activemq /mnt/conf
+    chown activemq:activemq /mnt/data
+    cp -a /opt/activemq/conf/* /mnt/conf/
+    cp -a /opt/activemq/data/* /mnt/data/
+    exit
+
+The last command will stop and remove the intermediate container. Your
+directories are now initialized and you can run ActiveMQ as described above.
+
