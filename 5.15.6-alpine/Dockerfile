@@ -1,4 +1,5 @@
-FROM openjdk:8-jre-alpine
+ARG BASE_IMAGE=openjdk:8-jre-alpine
+FROM $BASE_IMAGE
 
 ENV ACTIVEMQ_VERSION 5.15.6
 ENV ACTIVEMQ apache-activemq-$ACTIVEMQ_VERSION
