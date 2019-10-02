@@ -29,3 +29,17 @@ WORKDIR $ACTIVEMQ_HOME
 EXPOSE $ACTIVEMQ_TCP $ACTIVEMQ_AMQP $ACTIVEMQ_STOMP $ACTIVEMQ_MQTT $ACTIVEMQ_WS $ACTIVEMQ_UI
 
 CMD ["/bin/sh", "-c", "bin/activemq console"]
+
+HEALTHCHECK --interval=1s \
+            --start-period=10s \
+            CMD ( \
+                    curl \
+                        --user admin:admin \
+                        --silent \
+                        --show-error \
+                        "http://localhost:8161/api/jolokia/exec/org.apache.activemq:type=Broker,brokerName=localhost,service=Health/healthStatus" \
+                    # copy output to fd3 (grep will consume fd1)
+                    | tee /dev/fd/3 \
+                    | grep --silent 'Good' \
+                # show curl output, from fd3
+                ) 3>&1
