@@ -54,6 +54,8 @@ Image Tags
     rmohr/activemq:5.15.6-alpine
     rmohr/activemq:5.15.9
     rmohr/activemq:5.15.9-alpine
+    rmohr/activemq:5.15.11
+    rmohr/activemq:5.15.11-alpine
 
 Port Map
 --------
@@ -98,4 +100,3 @@ host directory:
 
 The last command will stop and remove the intermediate container. Your
 directories are now initialized and you can run ActiveMQ as described above.
-
