@@ -38,6 +38,8 @@ env:
       - AMQ_VERSION=5.15.6-alpine
       - AMQ_VERSION=5.15.9
       - AMQ_VERSION=5.15.9-alpine
+      - AMQ_VERSION=5.15.13
+      - AMQ_VERSION=5.15.13-alpine
 
 before_install:
   # upgrade docker-compose
