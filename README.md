@@ -1,7 +1,7 @@
 docker-activemq
 ===============
 
-[![Build Status](https://travis-ci.org/astraube/docker-activemq.svg?branch=master)](https://travis-ci.org/astraube/docker-activemq)
+[![Build Status](https://travis-ci.org/a-st/docker-activemq.svg?branch=master)](https://travis-ci.org/a-st/docker-activemq)
 [![Docker Pulls](https://img.shields.io/docker/pulls/astraube/activemq.svg?maxAge=2592000)](https://hub.docker.com/r/astraube/activemq/)
 
 [Docker](https://www.docker.io/) file for trusted builds of [ActiveMQ](http://activemq.apache.org/) on https://registry.hub.docker.com/u/astraube/activemq/.
