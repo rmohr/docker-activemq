@@ -5,7 +5,7 @@ services:
 
 env:
   global:
-    - DOCKER_COMPOSE_VERSION=1.8.0
+    - DOCKER_COMPOSE_VERSION=1.26.2
   matrix:
       - AMQ_VERSION=5.12.1
       - AMQ_VERSION=5.12.2
@@ -38,6 +38,12 @@ env:
       - AMQ_VERSION=5.15.6-alpine
       - AMQ_VERSION=5.15.9
       - AMQ_VERSION=5.15.9-alpine
+      - AMQ_VERSION=5.15.10
+      - AMQ_VERSION=5.15.10-alpine
+      - AMQ_VERSION=5.15.11
+      - AMQ_VERSION=5.15.11-alpine
+      - AMQ_VERSION=5.15.12
+      - AMQ_VERSION=5.15.12-alpine
 
 before_install:
   # upgrade docker-compose
