@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=openjdk:8-jre
+ARG BASE_IMAGE=balenalib/raspberrypi3-alpine-openjdk
 FROM $BASE_IMAGE
 
 ENV ACTIVEMQ_VERSION 5.15.6
@@ -8,8 +8,10 @@ ENV SHA512_VAL=a1b931a25c513f83f4f712cc126ee67a2b196ea23a243aa6cafe357ea03f721fb
 
 ENV ACTIVEMQ_HOME /opt/activemq
 
-
-RUN curl "https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz" -o $ACTIVEMQ-bin.tar.gz
+RUN set -x && \
+    mkdir -p /opt && \
+    apk --update add --virtual build-dependencies curl && \
+    curl https://archive.apache.org/dist/activemq/$ACTIVEMQ_VERSION/$ACTIVEMQ-bin.tar.gz -o $ACTIVEMQ-bin.tar.gz
 
 # Validate checksum
 RUN if [ "$SHA512_VAL" != "$(sha512sum $ACTIVEMQ-bin.tar.gz | awk '{print($1)}')" ];\
@@ -20,9 +22,11 @@ RUN if [ "$SHA512_VAL" != "$(sha512sum $ACTIVEMQ-bin.tar.gz | awk '{print($1)}')
 
 RUN tar xzf $ACTIVEMQ-bin.tar.gz -C  /opt && \
     ln -s /opt/$ACTIVEMQ $ACTIVEMQ_HOME && \
-    useradd -r -M -d $ACTIVEMQ_HOME activemq && \
+    addgroup -S activemq && adduser -S -H -G activemq -h $ACTIVEMQ_HOME activemq && \
     chown -R activemq:activemq /opt/$ACTIVEMQ && \
-    chown -h activemq:activemq $ACTIVEMQ_HOME 
+    chown -h activemq:activemq $ACTIVEMQ_HOME && \
+    apk del build-dependencies && \
+    rm -rf /var/cache/apk/*
 
 USER activemq
 
